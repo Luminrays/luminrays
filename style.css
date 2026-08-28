@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap');
+
+:root {
+  --bg: #0b0c0d;
+  --panel: #121416;
+  --text: #f3f0e9;
+  --muted: #aaa59b;
+  --accent: #d7ad55;
+  --line: #34312b;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "DM Sans", Arial, sans-serif;
+  line-height: 1.6;
+}
+.header {
+  height: 82px;
+  padding: 0 6vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: rgba(11,12,13,.94);
+  backdrop-filter: blur(12px);
+  z-index: 5;
+}
+.logo {
+  font-family: "Playfair Display", Georgia, serif;
+  letter-spacing: .18em;
+  font-size: 23px;
+}
+.logo span { font-style: italic; }
+nav { display: flex; gap: 30px; }
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+nav a:hover { color: var(--accent); }
+
+.hero {
+  min-height: 690px;
+  padding: 80px 6vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7vw;
+  align-items: center;
+}
+.hero-copy { max-width: 650px; }
+.eyebrow {
+  color: var(--accent);
+  letter-spacing: .22em;
+  font-size: 12px;
+  font-weight: 500;
+}
+h1, h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 500;
+  line-height: 1.05;
+}
+h1 { font-size: clamp(48px, 6vw, 82px); margin: 25px 0; }
+h1 em { color: var(--accent); }
+h2 { font-size: clamp(38px, 5vw, 62px); margin: 18px 0 30px; }
+.lead { color: var(--muted); max-width: 560px; font-size: 18px; }
+
+.button {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 15px 25px;
+  border: 1px solid var(--accent);
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: .14em;
+  font-size: 12px;
+}
+.button:hover { background: var(--accent); color: #111; }
+
+.image-placeholder {
+  min-height: 500px;
+  border: 1px dashed #555047;
+  background: radial-gradient(circle at 50% 45%, #3a2a16 0, #18130e 25%, #101214 60%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  letter-spacing: .16em;
+  text-align: center;
+}
+.image-placeholder small {
+  margin-top: 12px;
+  color: var(--muted);
+  letter-spacing: .03em;
+  font-size: 12px;
+}
+
+.features {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.features div {
+  padding: 32px 28px;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.features div:last-child { border-right: 0; }
+.features strong { color: var(--accent); font-size: 13px; }
+.features span { font-size: 12px; letter-spacing: .13em; }
+
+.section { padding: 120px 12vw; max-width: 1250px; margin: auto; }
+.section > p:not(.eyebrow) { color: var(--muted); max-width: 760px; font-size: 18px; }
+.applications { max-width: none; background: var(--panel); }
+.application-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.application-grid div {
+  padding: 38px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  letter-spacing: .15em;
+  font-size: 13px;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10vw;
+}
+.contact {
+  padding: 130px 12vw;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+.contact p:not(.eyebrow) { color: var(--muted); }
+footer {
+  padding: 35px 6vw;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+}
+footer .logo { color: var(--text); }
+
+@media (max-width: 800px) {
+  nav { display: none; }
+  .hero, .split { grid-template-columns: 1fr; }
+  .hero { padding-top: 55px; }
+  .image-placeholder { min-height: 380px; }
+  .features { grid-template-columns: 1fr 1fr; }
+  .features div { border-bottom: 1px solid var(--line); }
+  .application-grid { grid-template-columns: 1fr 1fr; }
+  .section, .contact { padding: 80px 7vw; }
+  footer { display: block; }
+}
