@@ -3,8 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>LuminRays — Electronic Flame Lighting</title>
-  <meta name="description" content="LuminRays electronic flame lighting — the atmosphere of real fire without open flame.">
+
+  <meta
+    name="description"
+    content="LuminRays electronic flame lighting — the atmosphere of real fire without open flame."
+  >
+
   <link rel="stylesheet" href="style.css">
 
   <style>
@@ -13,6 +19,7 @@
       height: 100%;
       object-fit: contain;
       display: block;
+      transition: transform 0.15s ease;
     }
 
     .video-section {
@@ -26,6 +33,89 @@
       display: block;
       margin: 35px auto 0;
       border-radius: 4px;
+    }
+
+    /* TEMPORARY CONTROL PANEL */
+
+    #adjust-panel {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 99999;
+      width: 270px;
+      padding: 18px;
+      background: rgba(15, 16, 18, 0.96);
+      border: 1px solid #d7ad55;
+      border-radius: 10px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      color: #f3f0e9;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+    }
+
+    #adjust-panel h3 {
+      margin: 0 0 14px;
+      color: #d7ad55;
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .adjust-row {
+      margin: 12px 0;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #34312b;
+    }
+
+    .adjust-title {
+      margin-bottom: 7px;
+      color: #aaa59b;
+    }
+
+    .adjust-buttons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .adjust-buttons button,
+    #adjust-panel .reset-button {
+      border: 1px solid #d7ad55;
+      background: #17181a;
+      color: #f3f0e9;
+      border-radius: 5px;
+      cursor: pointer;
+      min-width: 38px;
+      min-height: 34px;
+      font-size: 18px;
+    }
+
+    .adjust-buttons button:hover,
+    #adjust-panel .reset-button:hover {
+      background: #d7ad55;
+      color: #111;
+    }
+
+    .adjust-value {
+      flex: 1;
+      text-align: center;
+      color: #d7ad55;
+      font-size: 12px;
+    }
+
+    #adjust-panel .reset-button {
+      width: 100%;
+      margin-top: 8px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    #adjust-panel .hint {
+      margin-top: 12px;
+      color: #77736c;
+      font-size: 10px;
+      line-height: 1.4;
     }
   </style>
 </head>
@@ -43,12 +133,16 @@
     </nav>
   </header>
 
+
   <main>
 
     <section class="hero">
 
       <div class="hero-copy">
-        <p class="eyebrow">ELECTRONIC FLAME LIGHTING</p>
+
+        <p class="eyebrow">
+          ELECTRONIC FLAME LIGHTING
+        </p>
 
         <h1>
           The atmosphere of real fire.<br>
@@ -63,14 +157,18 @@
         <a class="button" href="#contact">
           DISCOVER LUMINRAYS
         </a>
+
       </div>
 
+
       <div class="image-placeholder">
+
         <img
           class="torch-photo"
           src="факел отдельный.png"
           alt="LuminRays electronic flame torch"
         >
+
       </div>
 
     </section>
@@ -103,9 +201,13 @@
 
     <section class="video-section">
 
-      <p class="eyebrow">SEE LUMINRAYS IN ACTION</p>
+      <p class="eyebrow">
+        SEE LUMINRAYS IN ACTION
+      </p>
 
-      <h2>Light that looks alive.</h2>
+      <h2>
+        Light that looks alive.
+      </h2>
 
       <video controls playsinline preload="metadata">
         <source src="29.mp4" type="video/mp4">
@@ -117,9 +219,13 @@
 
     <section id="technology" class="section">
 
-      <p class="eyebrow">THE TECHNOLOGY</p>
+      <p class="eyebrow">
+        THE TECHNOLOGY
+      </p>
 
-      <h2>Light that behaves like living fire.</h2>
+      <h2>
+        Light that behaves like living fire.
+      </h2>
 
       <p>
         LuminRays is an electronic decorative flame system developed to reproduce
@@ -132,15 +238,19 @@
 
     <section id="applications" class="section applications">
 
-      <p class="eyebrow">DESIGNED FOR</p>
+      <p class="eyebrow">
+        DESIGNED FOR
+      </p>
 
       <div class="application-grid">
+
         <div>CASTLES</div>
         <div>HOTELS</div>
         <div>PARKS</div>
         <div>BRIDGES</div>
         <div>GARDENS</div>
         <div>EVENTS</div>
+
       </div>
 
     </section>
@@ -149,8 +259,15 @@
     <section id="about" class="section split">
 
       <div>
-        <p class="eyebrow">LUMINRAYS</p>
-        <h2>A different kind of light.</h2>
+
+        <p class="eyebrow">
+          LUMINRAYS
+        </p>
+
+        <h2>
+          A different kind of light.
+        </h2>
+
       </div>
 
       <p>
@@ -165,11 +282,17 @@
 
     <section id="contact" class="contact">
 
-      <p class="eyebrow">CONTACT</p>
+      <p class="eyebrow">
+        CONTACT
+      </p>
 
-      <h2>Interested in LuminRays?</h2>
+      <h2>
+        Interested in LuminRays?
+      </h2>
 
-      <p>Tell us where you would like to use the system.</p>
+      <p>
+        Tell us where you would like to use the system.
+      </p>
 
       <a class="button" href="mailto:info@luminrays.ch">
         REQUEST INFORMATION
@@ -186,9 +309,235 @@
       LUMIN<span>RAYS</span>
     </div>
 
-    <p>Electronic flame lighting</p>
+    <p>
+      Electronic flame lighting
+    </p>
 
   </footer>
+
+
+  <!-- TEMPORARY ADJUSTMENT PANEL -->
+
+  <div id="adjust-panel">
+
+    <h3>Настройка</h3>
+
+
+    <div class="adjust-row">
+
+      <div class="adjust-title">
+        Факел — положение
+      </div>
+
+      <div class="adjust-buttons">
+
+        <button onclick="moveTorch(-10,0)">←</button>
+
+        <button onclick="moveTorch(10,0)">→</button>
+
+        <button onclick="moveTorch(0,-10)">↑</button>
+
+        <button onclick="moveTorch(0,10)">↓</button>
+
+      </div>
+
+      <div class="adjust-value" id="position-value">
+        X: 0 px | Y: 0 px
+      </div>
+
+    </div>
+
+
+    <div class="adjust-row">
+
+      <div class="adjust-title">
+        Размер факела
+      </div>
+
+      <div class="adjust-buttons">
+
+        <button onclick="resizeTorch(-0.05)">−</button>
+
+        <div class="adjust-value" id="torch-size">
+          100%
+        </div>
+
+        <button onclick="resizeTorch(0.05)">+</button>
+
+      </div>
+
+    </div>
+
+
+    <div class="adjust-row">
+
+      <div class="adjust-title">
+        Размер заголовка
+      </div>
+
+      <div class="adjust-buttons">
+
+        <button onclick="resizeTitle(-2)">−</button>
+
+        <div class="adjust-value" id="title-size">
+          86 px
+        </div>
+
+        <button onclick="resizeTitle(2)">+</button>
+
+      </div>
+
+    </div>
+
+
+    <div class="adjust-row">
+
+      <div class="adjust-title">
+        Размер текста
+      </div>
+
+      <div class="adjust-buttons">
+
+        <button onclick="resizeLead(-1)">−</button>
+
+        <div class="adjust-value" id="lead-size">
+          18 px
+        </div>
+
+        <button onclick="resizeLead(1)">+</button>
+
+      </div>
+
+    </div>
+
+
+    <button class="reset-button" onclick="resetAdjustments()">
+      Сбросить
+    </button>
+
+    <div class="hint">
+      Настраивай кнопками до тех пор, пока первый экран
+      не будет выглядеть именно так, как тебе нравится.
+    </div>
+
+  </div>
+
+
+  <script>
+
+    const torch = document.querySelector(".torch-photo");
+    const title = document.querySelector(".hero-copy h1");
+    const lead = document.querySelector(".hero-copy .lead");
+
+    let torchX = 0;
+    let torchY = 0;
+    let torchScale = 1;
+
+    let titleSize = 86;
+    let leadSize = 18;
+
+
+    function updateTorch() {
+
+      torch.style.transform =
+        `translate(${torchX}px, ${torchY}px) scale(${torchScale})`;
+
+      document.getElementById("position-value").textContent =
+        `X: ${torchX} px | Y: ${torchY} px`;
+
+      document.getElementById("torch-size").textContent =
+        Math.round(torchScale * 100) + "%";
+    }
+
+
+    function moveTorch(x, y) {
+
+      torchX += x;
+      torchY += y;
+
+      updateTorch();
+    }
+
+
+    function resizeTorch(amount) {
+
+      torchScale += amount;
+
+      if (torchScale < 0.5) {
+        torchScale = 0.5;
+      }
+
+      if (torchScale > 2) {
+        torchScale = 2;
+      }
+
+      updateTorch();
+    }
+
+
+    function resizeTitle(amount) {
+
+      titleSize += amount;
+
+      if (titleSize < 40) {
+        titleSize = 40;
+      }
+
+      if (titleSize > 130) {
+        titleSize = 130;
+      }
+
+      title.style.fontSize = titleSize + "px";
+
+      document.getElementById("title-size").textContent =
+        titleSize + " px";
+    }
+
+
+    function resizeLead(amount) {
+
+      leadSize += amount;
+
+      if (leadSize < 12) {
+        leadSize = 12;
+      }
+
+      if (leadSize > 30) {
+        leadSize = 30;
+      }
+
+      lead.style.fontSize = leadSize + "px";
+
+      document.getElementById("lead-size").textContent =
+        leadSize + " px";
+    }
+
+
+    function resetAdjustments() {
+
+      torchX = 0;
+      torchY = 0;
+      torchScale = 1;
+
+      titleSize = 86;
+      leadSize = 18;
+
+      title.style.fontSize = titleSize + "px";
+      lead.style.fontSize = leadSize + "px";
+
+      updateTorch();
+
+      document.getElementById("title-size").textContent =
+        titleSize + " px";
+
+      document.getElementById("lead-size").textContent =
+        leadSize + " px";
+    }
+
+
+    updateTorch();
+
+  </script>
 
 </body>
 </html>
