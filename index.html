@@ -1,611 +1,1039 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LuminRays — Electronic Flame Lighting</title>
+  <title>LuminRays — Electronic Flame Lighting</title>
 
-<meta name="description" content="LuminRays electronic flame lighting — the atmosphere of real fire without open flame.">
+  <meta
+    name="description"
+    content="LuminRays electronic flame lighting — the atmosphere of real fire without open flame."
+  >
 
-<style>
-* { box-sizing: border-box; }
+  <link rel="stylesheet" href="style.css">
 
-html { scroll-behavior: smooth; }
+  <style>
 
-body {
-    margin: 0;
-    background: #090a0b;
-    color: #f3f0e9;
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.5;
-}
+    /* =========================================================
+       TORCH
+       ========================================================= */
 
-.header {
-    height: 82px;
-    padding: 0 6vw;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #34312b;
-}
+    .torch-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
 
-.logo {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 18px;
-    letter-spacing: 0.18em;
-    color: #f3f0e9;
-}
+      transform:
+        translate(var(--torch-x, 0px), var(--torch-y, 0px))
+        scale(var(--torch-scale, 1));
 
-.logo span { color: #d7ad55; }
+      transform-origin: center center;
 
-nav {
-    display: flex;
-    gap: 30px;
-}
-
-nav a {
-    color: #aaa59b;
-    text-decoration: none;
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
-nav a:hover { color: #d7ad55; }
-
-.hero {
-    min-height: 720px;
-    padding: 55px 6vw;
-    display: grid;
-    grid-template-columns: 0.85fr 1.15fr;
-    gap: 5vw;
-    align-items: center;
-}
-
-.hero-copy { max-width: 650px; }
-
-.eyebrow {
-    margin: 0 0 18px;
-    color: #d7ad55;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-}
-
-h1, h2 {
-    font-family: Georgia, "Times New Roman", serif;
-    font-weight: 500;
-    line-height: 1.02;
-}
-
-h1 {
-    margin: 0 0 28px;
-    font-size: 72px;
-}
-
-h1 em {
-    color: #d7ad55;
-    font-style: italic;
-}
-
-.lead {
-    max-width: 560px;
-    margin: 0 0 32px;
-    color: #aaa59b;
-    font-size: 18px;
-    line-height: 1.65;
-}
-
-.button {
-    display: inline-block;
-    padding: 14px 24px;
-    border: 1px solid #d7ad55;
-    color: #f3f0e9;
-    text-decoration: none;
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-}
-
-.button:hover {
-    background: #d7ad55;
-    color: #090a0b;
-}
-
-.image-placeholder {
-    width: 100%;
-    height: 620px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.torch-photo {
-    width: 100%;
-    height: 620px;
-    display: block;
-    object-fit: contain;
-    object-position: center;
-    transform: translate(0px, 0px) scale(1);
-    transition: transform 0.08s linear;
-}
-
-.features {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border-top: 1px solid #34312b;
-    border-bottom: 1px solid #34312b;
-}
-
-.features > div {
-    min-height: 90px;
-    padding: 22px 25px;
-    border-right: 1px solid #34312b;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 7px;
-}
-
-.features > div:last-child { border-right: none; }
-
-.features strong {
-    color: #d7ad55;
-    font-size: 12px;
-}
-
-.features span {
-    color: #aaa59b;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-}
-
-.video-section {
-    padding: 100px 6vw;
-    text-align: center;
-}
-
-.video-section h2 {
-    margin: 0;
-    font-size: 52px;
-}
-
-.video-section video {
-    width: 100%;
-    max-width: 900px;
-    display: block;
-    margin: 45px auto 0;
-    border: 1px solid #34312b;
-}
-
-.section {
-    padding: 110px 10vw;
-    border-top: 1px solid #34312b;
-}
-
-.section h2 {
-    max-width: 800px;
-    margin: 0 0 28px;
-    font-size: 52px;
-}
-
-.section > p:last-child {
-    max-width: 800px;
-    color: #aaa59b;
-    font-size: 18px;
-    line-height: 1.7;
-}
-
-.application-grid {
-    margin-top: 40px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid #34312b;
-}
-
-.application-grid div {
-    padding: 30px 10px;
-    border-bottom: 1px solid #34312b;
-    color: #aaa59b;
-    font-size: 13px;
-    letter-spacing: 0.15em;
-}
-
-.split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8vw;
-    align-items: start;
-}
-
-.contact {
-    padding: 120px 10vw;
-    text-align: center;
-    border-top: 1px solid #34312b;
-}
-
-.contact h2 {
-    margin: 0 0 20px;
-    font-size: 58px;
-}
-
-.contact p { color: #aaa59b; font-size: 18px; }
-
-footer {
-    padding: 35px 6vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid #34312b;
-    color: #77736c;
-}
-
-footer p { margin: 0; font-size: 12px; }
-
-/* ===== НАША ПАНЕЛЬ УПРАВЛЕНИЯ ===== */
-
-#controls {
-    position: fixed;
-    right: 18px;
-    bottom: 18px;
-    z-index: 99999;
-    width: 190px;
-    padding: 12px;
-    background: rgba(15, 15, 15, 0.96);
-    border: 1px solid #d7ad55;
-    box-shadow: 0 4px 25px rgba(0,0,0,0.5);
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-#controls-title {
-    margin-bottom: 9px;
-    color: #d7ad55;
-    text-align: center;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-}
-
-.control-row {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-    margin-top: 6px;
-}
-
-#controls button {
-    width: 46px;
-    height: 34px;
-    padding: 0;
-    border: 1px solid #d7ad55;
-    background: #111;
-    color: #f3f0e9;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-#controls button:hover {
-    background: #d7ad55;
-    color: #111;
-}
-
-#controls button.wide {
-    width: 72px;
-    font-size: 12px;
-}
-
-#controls .value {
-    min-width: 72px;
-    height: 34px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #aaa59b;
-    font-size: 11px;
-}
-
-#controls-help {
-    margin-top: 9px;
-    color: #77736c;
-    text-align: center;
-    font-size: 10px;
-    line-height: 1.35;
-}
-
-@media (max-width: 900px) {
-    .header {
-        height: auto;
-        padding: 22px 6vw;
-        flex-direction: column;
-        gap: 20px;
+      transition: none;
     }
 
-    nav {
+
+    /* =========================================================
+       VIDEO
+       ========================================================= */
+
+    .video-section {
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .video-section video {
+      width: 100%;
+      max-width: 900px;
+      display: block;
+      margin: 35px auto 0;
+      border-radius: 4px;
+    }
+
+
+    /* =========================================================
+       TORCH CONTROL PANEL
+       ========================================================= */
+
+    #torch-controls {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+
+      z-index: 99999;
+
+      width: 190px;
+
+      padding: 14px;
+
+      background: rgba(18, 18, 18, 0.96);
+
+      border: 1px solid #d7ad55;
+
+      border-radius: 8px;
+
+      box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.5);
+
+      font-family: Arial, sans-serif;
+
+      color: #f3f0e9;
+    }
+
+
+    #torch-controls-title {
+      text-align: center;
+
+      font-size: 12px;
+
+      letter-spacing: 2px;
+
+      color: #d7ad55;
+
+      margin-bottom: 12px;
+    }
+
+
+    .control-row {
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      gap: 6px;
+
+      margin: 6px 0;
+    }
+
+
+    .control-button {
+      width: 42px;
+      height: 34px;
+
+      border: 1px solid #d7ad55;
+
+      background: #121416;
+
+      color: #f3f0e9;
+
+      border-radius: 4px;
+
+      cursor: pointer;
+
+      font-size: 18px;
+
+      line-height: 1;
+    }
+
+
+    .control-button:hover {
+      background: #d7ad55;
+
+      color: #121416;
+    }
+
+
+    .control-wide {
+      width: 62px;
+
+      font-size: 12px;
+    }
+
+
+    .control-value {
+      min-width: 65px;
+
+      text-align: center;
+
+      font-size: 11px;
+
+      color: #aaa;
+    }
+
+
+    .control-help {
+      margin-top: 10px;
+
+      padding-top: 9px;
+
+      border-top: 1px solid #34312b;
+
+      text-align: center;
+
+      font-size: 9px;
+
+      line-height: 1.4;
+
+      color: #888;
+    }
+
+
+    /* =========================================================
+       MOBILE
+       ========================================================= */
+
+
+    /* =========================================================
+       LANGUAGE SWITCHER
+       ========================================================= */
+
+    .language-switcher {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-left: 18px;
+      padding-left: 18px;
+      border-left: 1px solid #38342d;
+    }
+
+    .language-switcher a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 10px;
+      letter-spacing: 1px;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .language-switcher a:hover,
+    .language-switcher a.active {
+      color: #d7ad55;
+    }
+
+    @media (max-width: 800px) {
+      .language-switcher {
+        margin-left: 10px;
+        padding-left: 10px;
+        gap: 5px;
+      }
+
+      .language-switcher a {
+        font-size: 9px;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .header nav {
         flex-wrap: wrap;
-        justify-content: center;
-        gap: 18px;
+        justify-content: flex-end;
+      }
+
+      #torch-controls {
+        right: 10px;
+        bottom: 10px;
+
+        width: 175px;
+      }
+
     }
 
-    .hero {
-        grid-template-columns: 1fr;
-        padding-top: 60px;
-        padding-bottom: 60px;
-    }
+  </style>
 
-    h1 { font-size: 58px; }
-
-    .image-placeholder { height: 500px; }
-    .torch-photo { height: 500px; }
-
-    .features { grid-template-columns: 1fr 1fr; }
-
-    .features > div:nth-child(2) { border-right: none; }
-
-    .application-grid { grid-template-columns: 1fr 1fr; }
-
-    .split { grid-template-columns: 1fr; gap: 30px; }
-
-    footer {
-        flex-direction: column;
-        gap: 15px;
-    }
-}
-
-@media (max-width: 550px) {
-    .features { grid-template-columns: 1fr; }
-
-    .features > div { border-right: none; }
-
-    .application-grid { grid-template-columns: 1fr; }
-
-    .hero,
-    .section,
-    .contact {
-        padding-left: 7vw;
-        padding-right: 7vw;
-    }
-
-    h1 { font-size: 46px; }
-
-    #controls {
-        right: 8px;
-        bottom: 8px;
-        transform: scale(0.9);
-        transform-origin: bottom right;
-    }
-}
-</style>
 </head>
+
 
 <body>
 
-<header class="header">
-    <div class="logo">LUMIN<span>RAYS</span></div>
+
+  <!-- =======================================================
+       HEADER
+       ======================================================= -->
+
+  <header class="header">
+
+    <div class="logo">
+      LUMIN<span>RAYS</span>
+    </div>
 
     <nav>
-        <a href="#technology">Technology</a>
-        <a href="#applications">Applications</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+
+      <a href="#technology">Technology</a>
+
+      <a href="#applications">Applications</a>
+
+      <a href="#about">About</a>
+
+      <a href="#contact">Contact</a>
+
+      <div class="language-switcher" aria-label="Language selection">
+        <a href="pro-fakel-en.html" class="active" title="English">EN</a>
+        <a href="pro-fakel-uk.html" title="Українська">UA</a>
+        <a href="pro-fakel-ru.html" title="Русский">RU</a>
+        <a href="pro-fakel-de.html" title="Deutsch">DE</a>
+        <a href="pro-fakel-fr.html" title="Français">FR</a>
+      </div>
+
     </nav>
-</header>
 
-<main>
+  </header>
 
-<section class="hero">
 
-    <div class="hero-copy">
 
-        <p class="eyebrow">ELECTRONIC FLAME LIGHTING</p>
+  <main>
 
-        <h1>
-            The atmosphere<br>
-            of real fire.<br>
-            <em>Without fire.</em>
-        </h1>
 
-        <p class="lead">
-            LuminRays creates a natural living-flame effect with
-            advanced LED technology. Designed for places where
-            atmosphere matters.
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+
+    <section class="hero">
+
+
+      <!-- LEFT SIDE -->
+
+      <div class="hero-copy">
+
+        <p class="eyebrow">
+          ELECTRONIC FLAME LIGHTING
         </p>
 
-        <a class="button" href="#contact">DISCOVER LUMINRAYS</a>
 
-    </div>
+        <h1 id="main-title">
 
-    <div class="image-placeholder">
-        <img
-            class="torch-photo"
-            src="факел отдельный.png"
-            alt="LuminRays electronic flame torch"
+          The atmosphere of real fire.<br>
+
+          <em>Without fire.</em>
+
+        </h1>
+
+
+        <p class="lead">
+
+          LuminRays creates a natural living-flame effect
+          with advanced LED technology.
+
+          Designed for places where atmosphere matters.
+
+        </p>
+
+
+        <a
+          class="button"
+          href="#contact"
         >
-    </div>
+          DISCOVER LUMINRAYS
+        </a>
 
-</section>
 
-<section class="features">
-    <div><strong>01</strong><span>REALISTIC FLAME EFFECT</span></div>
-    <div><strong>02</strong><span>NO OPEN FLAME</span></div>
-    <div><strong>03</strong><span>LOW ENERGY CONSUMPTION</span></div>
-    <div><strong>04</strong><span>BUILT TO LAST</span></div>
-</section>
+      </div>
 
-<section class="video-section">
-    <p class="eyebrow">SEE LUMINRAYS IN ACTION</p>
-    <h2>Light that looks alive.</h2>
 
-    <video controls playsinline preload="metadata">
-        <source src="29.mp4" type="video/mp4">
+
+      <!-- RIGHT SIDE ↑ TORCH -->
+
+      <div class="image-placeholder">
+
+        <img
+          id="torch"
+          class="torch-photo"
+          src="←↻→� ↓−������������.png"
+          alt="LuminRays electronic flame torch"
+        >
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FEATURES
+         ===================================================== -->
+
+    <section class="features">
+
+
+      <div>
+
+        <strong>01</strong>
+
+        <span>
+          REALISTIC FLAME EFFECT
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <strong>02</strong>
+
+        <span>
+          NO OPEN FLAME
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <strong>03</strong>
+
+        <span>
+          LOW ENERGY CONSUMPTION
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <strong>04</strong>
+
+        <span>
+          BUILT TO LAST
+        </span>
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         VIDEO
+         ===================================================== -->
+
+    <section class="video-section">
+
+
+      <p class="eyebrow">
+        SEE LUMINRAYS IN ACTION
+      </p>
+
+
+      <h2>
+        Light that looks alive.
+      </h2>
+
+
+      <video
+        controls
+        playsinline
+        preload="metadata"
+      >
+
+        <source
+          src="29.mp4"
+          type="video/mp4"
+        >
+
         Your browser does not support video playback.
-    </video>
-</section>
 
-<section id="technology" class="section">
-    <p class="eyebrow">THE TECHNOLOGY</p>
+      </video>
 
-    <h2>Light that behaves like living fire.</h2>
 
-    <p>
-        LuminRays is an electronic decorative flame system
-        developed to reproduce the visual character of a real
-        flame without combustion, smoke or heat. The technology
-        is designed for architectural and atmospheric lighting.
-    </p>
-</section>
+    </section>
 
-<section id="applications" class="section">
-    <p class="eyebrow">DESIGNED FOR</p>
 
-    <div class="application-grid">
-        <div>CASTLES</div>
-        <div>HOTELS</div>
-        <div>PARKS</div>
-        <div>BRIDGES</div>
-        <div>GARDENS</div>
-        <div>EVENTS</div>
-    </div>
-</section>
 
-<section id="about" class="section split">
-    <div>
-        <p class="eyebrow">LUMINRAYS</p>
-        <h2>A different kind of light.</h2>
-    </div>
+    <!-- =====================================================
+         TECHNOLOGY
+         ===================================================== -->
 
-    <p>
-        LuminRays combines electronics, optics and decorative
-        design to create the feeling of fire without using an
-        open flame. It is intended for locations where traditional
+    <section
+      id="technology"
+      class="section"
+    >
+
+      <p class="eyebrow">
+        THE TECHNOLOGY
+      </p>
+
+
+      <h2>
+        Light that behaves like living fire.
+      </h2>
+
+
+      <p>
+
+        LuminRays is an electronic decorative flame
+        system developed to reproduce the visual
+        character of a real flame without combustion,
+        smoke or heat.
+
+        The technology is designed for architectural
+        and atmospheric lighting.
+
+      </p>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         APPLICATIONS
+         ===================================================== -->
+
+    <section
+      id="applications"
+      class="section applications"
+    >
+
+      <p class="eyebrow">
+        DESIGNED FOR
+      </p>
+
+
+      <div class="application-grid">
+
+
+        <div>
+          CASTLES
+        </div>
+
+
+        <div>
+          HOTELS
+        </div>
+
+
+        <div>
+          PARKS
+        </div>
+
+
+        <div>
+          BRIDGES
+        </div>
+
+
+        <div>
+          GARDENS
+        </div>
+
+
+        <div>
+          EVENTS
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ABOUT
+         ===================================================== -->
+
+    <section
+      id="about"
+      class="section split"
+    >
+
+
+      <div>
+
+        <p class="eyebrow">
+          LUMINRAYS
+        </p>
+
+
+        <h2>
+          A different kind of light.
+        </h2>
+
+      </div>
+
+
+      <p>
+
+        LuminRays combines electronics, optics
+        and decorative design to create the feeling
+        of fire without using an open flame.
+
+        It is intended for locations where traditional
         fire is impractical, unsafe or simply not permitted.
-    </p>
-</section>
 
-<section id="contact" class="contact">
-    <p class="eyebrow">CONTACT</p>
+      </p>
 
-    <h2>Interested in LuminRays?</h2>
 
-    <p>Tell us where you would like to use the system.</p>
+    </section>
 
-    <a class="button" href="mailto:info@luminrays.ch">
+
+
+    <!-- =====================================================
+         CONTACT
+         ===================================================== -->
+
+    <section
+      id="contact"
+      class="contact"
+    >
+
+
+      <p class="eyebrow">
+        CONTACT
+      </p>
+
+
+      <h2>
+        Interested in LuminRays?
+      </h2>
+
+
+      <p>
+        Tell us where you would like to use the system.
+      </p>
+
+
+      <a
+        class="button"
+        href="mailto:info@luminrays.ch"
+      >
         REQUEST INFORMATION
-    </a>
-</section>
-
-</main>
-
-<footer>
-    <div class="logo">LUMIN<span>RAYS</span></div>
-    <p>Electronic flame lighting</p>
-</footer>
+      </a>
 
 
-<!-- ===== ПАНЕЛЬ УПРАВЛЕНИЯ ФАКЕЛОМ ===== -->
+    </section>
 
-<div id="controls">
 
-    <div id="controls-title">POSITION & SIZE</div>
+  </main>
+
+
+
+  <!-- =======================================================
+       FOOTER
+       ======================================================= -->
+
+  <footer>
+
+
+    <div class="logo">
+      LUMIN<span>RAYS</span>
+    </div>
+
+
+    <p>
+      Electronic flame lighting
+    </p>
+
+
+  </footer>
+
+
+
+  <!-- =======================================================
+       TORCH CONTROL PANEL
+       ======================================================= -->
+
+  <div id="torch-controls">
+
+
+    <div id="torch-controls-title">
+      TORCH CONTROL
+    </div>
+
+
+    <!-- UP -->
 
     <div class="control-row">
-        <button onclick="moveTorch(0,-10)">↑</button>
+
+      <button
+        class="control-button"
+        onclick="moveTorch(0, -10)"
+      >
+        ���
+      </button>
+
     </div>
+
+
+    <!-- LEFT / RESET / RIGHT -->
 
     <div class="control-row">
-        <button onclick="moveTorch(-10,0)">←</button>
-        <button onclick="resetTorch()">↺</button>
-        <button onclick="moveTorch(10,0)">→</button>
+
+      <button
+        class="control-button"
+        onclick="moveTorch(-10, 0)"
+      >
+        ���
+      </button>
+
+
+      <button
+        class="control-button"
+        onclick="resetTorch()"
+      >
+        ���
+      </button>
+
+
+      <button
+        class="control-button"
+        onclick="moveTorch(10, 0)"
+      >
+        ���
+      </button>
+
     </div>
+
+
+    <!-- DOWN -->
 
     <div class="control-row">
-        <button onclick="moveTorch(0,10)">↓</button>
+
+      <button
+        class="control-button"
+        onclick="moveTorch(0, 10)"
+      >
+        ���
+      </button>
+
     </div>
+
+
+    <!-- SIZE -->
 
     <div class="control-row">
-        <button onclick="scaleTorch(-0.05)">−</button>
-        <div class="value" id="scaleValue">100%</div>
-        <button onclick="scaleTorch(0.05)">+</button>
+
+      <button
+        class="control-button"
+        onclick="resizeTorch(-0.05)"
+      >
+        ���
+      </button>
+
+
+      <span
+        id="torch-size-value"
+        class="control-value"
+      >
+        100%
+      </span>
+
+
+      <button
+        class="control-button"
+        onclick="resizeTorch(0.05)"
+      >
+        +
+      </button>
+
     </div>
+
+
+    <!-- TEXT -->
 
     <div class="control-row">
-        <button class="wide" onclick="changeTitle(-4)">T −</button>
-        <div class="value" id="titleValue">72px</div>
-        <button class="wide" onclick="changeTitle(4)">T +</button>
+
+      <button
+        class="control-button control-wide"
+        onclick="resizeTitle(-2)"
+      >
+        T−
+      </button>
+
+
+      <span
+        id="title-size-value"
+        class="control-value"
+      >
+        AUTO
+      </span>
+
+
+      <button
+        class="control-button control-wide"
+        onclick="resizeTitle(2)"
+      >
+        T+
+      </button>
+
     </div>
 
-    <div id="controls-help">
-        Стрелки — положение факела<br>
-        + / − — размер факела<br>
-        T + / T − — размер заголовка<br>
-        ↺ — вернуть исходное положение
+
+    <div class="control-help">
+
+      Arrows — move the torch<br>
+      − / + — change torch size<br>
+      T− / T+ — change title size<br>
+      ↻ — restore the original position
+
     </div>
 
-</div>
+
+  </div>
 
 
-<script>
-let imageX = Number(localStorage.getItem("luminraysX")) || 0;
-let imageY = Number(localStorage.getItem("luminraysY")) || 0;
-let imageScale = Number(localStorage.getItem("luminraysScale")) || 1;
-let titleSize = Number(localStorage.getItem("luminraysTitle")) || 72;
 
-function updateTorch() {
-    const image = document.querySelector(".torch-photo");
+  <!-- =======================================================
+       JAVASCRIPT
+       ======================================================= -->
 
-    image.style.transform =
-        "translate(" + imageX + "px, " + imageY + "px) scale(" + imageScale + ")";
+  <script>
 
-    document.getElementById("scaleValue").textContent =
-        Math.round(imageScale * 100) + "%";
+    const torch = document.getElementById("torch");
 
-    document.getElementById("titleValue").textContent =
+    const title = document.getElementById("main-title");
+
+
+    /* -------------------------------------------------------
+       INITIAL VALUES
+       ------------------------------------------------------- */
+
+    let torchX =
+      Number(localStorage.getItem("torchX")) || 0;
+
+    let torchY =
+      Number(localStorage.getItem("torchY")) || 0;
+
+    let torchScale =
+      Number(localStorage.getItem("torchScale")) || 1;
+
+
+    let titleSize =
+      Number(localStorage.getItem("titleSize")) || 0;
+
+
+
+    /* -------------------------------------------------------
+       APPLY TORCH
+       ------------------------------------------------------- */
+
+    function updateTorch() {
+
+      torch.style.setProperty(
+        "--torch-x",
+        torchX + "px"
+      );
+
+
+      torch.style.setProperty(
+        "--torch-y",
+        torchY + "px"
+      );
+
+
+      torch.style.setProperty(
+        "--torch-scale",
+        torchScale
+      );
+
+
+      document.getElementById(
+        "torch-size-value"
+      ).textContent =
+        Math.round(torchScale * 100) + "%";
+
+
+      localStorage.setItem(
+        "torchX",
+        torchX
+      );
+
+
+      localStorage.setItem(
+        "torchY",
+        torchY
+      );
+
+
+      localStorage.setItem(
+        "torchScale",
+        torchScale
+      );
+
+    }
+
+
+
+    /* -------------------------------------------------------
+       MOVE TORCH
+       ------------------------------------------------------- */
+
+    function moveTorch(x, y) {
+
+      torchX += x;
+
+      torchY += y;
+
+      updateTorch();
+
+    }
+
+
+
+    /* -------------------------------------------------------
+       RESIZE TORCH
+       ------------------------------------------------------- */
+
+    function resizeTorch(amount) {
+
+      torchScale += amount;
+
+
+      if (torchScale < 0.3) {
+        torchScale = 0.3;
+      }
+
+
+      if (torchScale > 2.5) {
+        torchScale = 2.5;
+      }
+
+
+      updateTorch();
+
+    }
+
+
+
+    /* -------------------------------------------------------
+       RESET TORCH
+       ------------------------------------------------------- */
+
+    function resetTorch() {
+
+      torchX = 0;
+
+      torchY = 0;
+
+      torchScale = 1;
+
+      updateTorch();
+
+    }
+
+
+
+    /* -------------------------------------------------------
+       TITLE SIZE
+       ------------------------------------------------------- */
+
+    function resizeTitle(amount) {
+
+      if (titleSize === 0) {
+
+        titleSize =
+          parseFloat(
+            getComputedStyle(title).fontSize
+          );
+
+      }
+
+
+      titleSize += amount;
+
+
+      if (titleSize < 30) {
+        titleSize = 30;
+      }
+
+
+      if (titleSize > 120) {
+        titleSize = 120;
+      }
+
+
+      title.style.fontSize =
         titleSize + "px";
 
-    document.querySelector("h1").style.fontSize =
-        titleSize + "px";
 
-    localStorage.setItem("luminraysX", imageX);
-    localStorage.setItem("luminraysY", imageY);
-    localStorage.setItem("luminraysScale", imageScale);
-    localStorage.setItem("luminraysTitle", titleSize);
-}
+      document.getElementById(
+        "title-size-value"
+      ).textContent =
+        Math.round(titleSize) + "px";
 
-function moveTorch(x, y) {
-    imageX += x;
-    imageY += y;
+
+      localStorage.setItem(
+        "titleSize",
+        titleSize
+      );
+
+    }
+
+
+
+    /* -------------------------------------------------------
+       RESTORE TITLE
+       ------------------------------------------------------- */
+
+    function restoreTitle() {
+
+      if (titleSize > 0) {
+
+        title.style.fontSize =
+          titleSize + "px";
+
+        document.getElementById(
+          "title-size-value"
+        ).textContent =
+          Math.round(titleSize) + "px";
+
+      }
+
+    }
+
+
+
+    /* -------------------------------------------------------
+       KEYBOARD ARROWS
+       ------------------------------------------------------- */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key === "ArrowUp" ||
+          event.key === "ArrowDown" ||
+          event.key === "ArrowLeft" ||
+          event.key === "ArrowRight"
+        ) {
+
+          event.preventDefault();
+
+
+          if (event.key === "ArrowUp") {
+            moveTorch(0, -10);
+          }
+
+
+          if (event.key === "ArrowDown") {
+            moveTorch(0, 10);
+          }
+
+
+          if (event.key === "ArrowLeft") {
+            moveTorch(-10, 0);
+          }
+
+
+          if (event.key === "ArrowRight") {
+            moveTorch(10, 0);
+          }
+
+        }
+
+      }
+    );
+
+
+
+    /* -------------------------------------------------------
+       START
+       ------------------------------------------------------- */
+
     updateTorch();
-}
 
-function scaleTorch(value) {
-    imageScale += value;
+    restoreTitle();
 
-    if (imageScale < 0.50) imageScale = 0.50;
-    if (imageScale > 2.00) imageScale = 2.00;
+  </script>
 
-    updateTorch();
-}
-
-function changeTitle(value) {
-    titleSize += value;
-
-    if (titleSize < 36) titleSize = 36;
-    if (titleSize > 110) titleSize = 110;
-
-    updateTorch();
-}
-
-function resetTorch() {
-    imageX = 0;
-    imageY = 0;
-    imageScale = 1;
-    updateTorch();
-}
-
-window.addEventListener("load", updateTorch);
-</script>
 
 </body>
+
 </html>
